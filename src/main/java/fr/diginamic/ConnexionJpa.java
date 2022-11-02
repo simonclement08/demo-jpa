@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 public class ConnexionJpa {
 
 	public static void main(String[] args) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("db_localhost");
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("recensement");
 		EntityManager em = entityManagerFactory.createEntityManager();
 
 		EntityTransaction transaction = em.getTransaction();
