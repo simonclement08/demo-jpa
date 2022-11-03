@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,23 +19,33 @@ import javax.persistence.TemporalType;
 @Table(name = "VILLE")
 public class Ville {
 
+	/** Id */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	/** Nom */
 	@Column(name = "NOM", length = 50, nullable = false)
 	private String nom;
 
+	/** Code postal */
 	@Column(name = "CODE_POSTAL", length = 10, nullable = false)
 	private String codePostal;
 
+	/** Date du dernier recensement */
 	@Column(name = "DATE_DERNIER_RECENSEMENT", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateDernierRecensement;
 
+	/** Catégorie */
 	@Column(name = "CATEGORIE", length = 20, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Categorie categorie;
+	
+	/** Région */
+	@ManyToOne
+	@JoinColumn(name="REGION_ID")
+	private Region region;
 
 	/** Constructeur */
 	public Ville() {
@@ -127,6 +139,20 @@ public class Ville {
 	 */
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+	
+	/** Getter pour l'attribut region
+	 * @return the region
+	 */
+	public Region getRegion() {
+		return region;
+	}
+
+	/** Setter pour l'attribut region
+	 * @param region the region to set
+	 */
+	public void setRegion(Region region) {
+		this.region = region;
 	}
 
 }

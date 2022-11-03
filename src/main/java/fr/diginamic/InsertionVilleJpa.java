@@ -29,6 +29,13 @@ public class InsertionVilleJpa {
 		ville2.setCodePostal("51100");
 		ville2.setCategorie(Categorie.GRANDE);
 		em.persist(ville2);
+		
+		Region newRegion = new Region();
+		newRegion.setNom("Grand Est");
+
+		em.persist(newRegion);
+		
+		ville1.setRegion(newRegion);
 
 		transaction.commit();
 
