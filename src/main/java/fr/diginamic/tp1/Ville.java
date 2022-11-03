@@ -1,4 +1,4 @@
-package fr.diginamic;
+package fr.diginamic.tp1;
 
 import java.util.Date;
 
