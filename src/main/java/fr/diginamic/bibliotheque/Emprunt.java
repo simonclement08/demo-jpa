@@ -48,9 +48,12 @@ public class Emprunt {
 
 	/** Liste des livres */
 	@ManyToMany
-	@JoinTable(name = "COMPO", joinColumns = @JoinColumn(name = "ID_EMP", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_LIV", referencedColumnName = "ID"))
+	@JoinTable(name = "COMPO", 
+	joinColumns = {@JoinColumn(name = "ID_EMP", referencedColumnName = "ID")}, 
+	inverseJoinColumns = {@JoinColumn(name = "ID_LIV", referencedColumnName = "ID")})
 	private List<Livre> livres = new ArrayList<Livre>();
 
+	/** Constructeur */
 	public Emprunt() {
 		super();
 	}

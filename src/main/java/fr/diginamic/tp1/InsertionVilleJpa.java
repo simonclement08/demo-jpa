@@ -36,6 +36,14 @@ public class InsertionVilleJpa {
 		em.persist(newRegion);
 
 		ville1.setRegion(newRegion);
+		
+		Habitant habitant = new Habitant();
+		habitant.setNom("SIMON");
+		habitant.setPrenom("Clément");
+		
+		em.persist(habitant);
+		
+		ville1.getHabitants().add(habitant);
 
 		transaction.commit();
 

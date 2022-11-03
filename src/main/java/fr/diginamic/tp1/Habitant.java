@@ -1,4 +1,4 @@
-package fr.diginamic.bibliotheque;
+package fr.diginamic.tp1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,33 +8,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "CLIENT")
-public class Client {
+@Table(name = "HABITANTS")
+public class Habitant {
 
 	/** Id */
 	@Id
-	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Column(name = "ID")
+	private int id;
 
 	/** Nom */
-	@Column(name = "NOM", length = 50, nullable = false)
+	@Column(name = "NOM", length = 20, nullable = false)
 	private String nom;
 
 	/** Prénom */
-	@Column(name = "PRENOM", length = 50, nullable = false)
+	@Column(name = "PRENOM", length = 20, nullable = false)
 	private String prenom;
-	
-	/** Liste des emprunts */
-	@OneToMany(mappedBy = "client")
-	List<Emprunt> emprunts = new ArrayList<Emprunt>();
+
+	/** Liste des villes */
+	@ManyToMany
+	@JoinTable(name = "VILLE_HABITANT", 
+		uniqueConstraints = {@UniqueConstraint(columnNames = { "ID_VILLE", "ID_HABITANT" })}, 
+		joinColumns = {@JoinColumn(name = "ID_HABITANT", referencedColumnName = "ID")}, 
+		inverseJoinColumns = {@JoinColumn(name = "ID_VILLE", referencedColumnName = "ID")})
+	private List<Ville> villes = new ArrayList<Ville>();
 
 	/** Constructeur */
-	public Client() {
+	public Habitant() {
 		super();
 	}
 
@@ -43,7 +50,7 @@ public class Client {
 	 * 
 	 * @return the id
 	 */
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -52,7 +59,7 @@ public class Client {
 	 * 
 	 * @param id the id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -92,10 +99,13 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	/** Getter pour l'attribut emprunts
-	 * @return the emprunts
+	/**
+	 * Getter pour l'attribut villes
+	 * 
+	 * @return the villes
 	 */
-	public List<Emprunt> getEmprunts() {
-		return emprunts;
+	public List<Ville> getVilles() {
+		return villes;
 	}
+
 }
