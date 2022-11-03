@@ -1,5 +1,6 @@
 package fr.diginamic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -25,10 +26,11 @@ public class Region {
 	
 	/** Liste des villes de la région */
 	@OneToMany(mappedBy = "region")
-	private List<Ville> villes;
+	private List<Ville> villes = new ArrayList<Ville>();
 
 	/** Constructeur */
 	public Region() {
+		super();
 	}
 
 	/**

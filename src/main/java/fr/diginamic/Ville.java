@@ -41,14 +41,15 @@ public class Ville {
 	@Column(name = "CATEGORIE", length = 20, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Categorie categorie;
-	
+
 	/** Région */
 	@ManyToOne
-	@JoinColumn(name="REGION_ID")
+	@JoinColumn(name = "REGION_ID")
 	private Region region;
 
 	/** Constructeur */
 	public Ville() {
+		super();
 	}
 
 	/**
@@ -140,15 +141,19 @@ public class Ville {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	
-	/** Getter pour l'attribut region
+
+	/**
+	 * Getter pour l'attribut region
+	 * 
 	 * @return the region
 	 */
 	public Region getRegion() {
 		return region;
 	}
 
-	/** Setter pour l'attribut region
+	/**
+	 * Setter pour l'attribut region
+	 * 
 	 * @param region the region to set
 	 */
 	public void setRegion(Region region) {
