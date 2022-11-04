@@ -28,7 +28,7 @@ public class Client {
 	/** Prénom */
 	@Column(name = "PRENOM", length = 50, nullable = false)
 	private String prenom;
-	
+
 	/** Liste des emprunts */
 	@OneToMany(mappedBy = "client")
 	List<Emprunt> emprunts = new ArrayList<Emprunt>();
@@ -36,6 +36,11 @@ public class Client {
 	/** Constructeur */
 	public Client() {
 		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
 	}
 
 	/**
@@ -92,7 +97,9 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	/** Getter pour l'attribut emprunts
+	/**
+	 * Getter pour l'attribut emprunts
+	 * 
 	 * @return the emprunts
 	 */
 	public List<Emprunt> getEmprunts() {

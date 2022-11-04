@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,9 +29,9 @@ public class Livre {
 	@Column(name = "AUTEUR", length = 50, nullable = false)
 	private String auteur;
 	
-	/** Liste des emprunts */
-	@ManyToMany(mappedBy = "livres")
-	private List<Emprunt> emprunts = new ArrayList<Emprunt>();
+	/** Liste des compos */
+	@OneToMany(mappedBy = "livre")
+	private List<Compo> compos = new ArrayList<Compo>();
 	
 	/** Constructeur */
 	public Livre() {
@@ -83,6 +83,13 @@ public class Livre {
 	 */
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
+	}
+
+	/** Getter pour l'attribut compos
+	 * @return the compos
+	 */
+	public List<Compo> getCompos() {
+		return compos;
 	}
 
 }

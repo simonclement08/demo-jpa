@@ -14,11 +14,23 @@ public class InsertionBibliotheque {
 		EntityTransaction transaction = em.getTransaction();
 
 		transaction.begin();
-		
+
 		Livre livre = em.find(Livre.class, 1);
-		
+
 		System.out.println(livre);
-		
+
+		Emprunt emprunt = em.find(Emprunt.class, 2);
+		System.out.println("\nListe des livres lié à l'emprunt n°2 : ");
+		for (Compo compo : emprunt.getCompos()) {
+			System.out.println(compo.getLivre());
+		}
+
+		Client client = em.find(Client.class, 3);
+		System.out.println("\nListe des emprunts lié au client n°3 : ");
+		for (Emprunt empr : client.getEmprunts()) {
+			System.out.println(empr);
+		}
+
 		transaction.commit();
 
 	}

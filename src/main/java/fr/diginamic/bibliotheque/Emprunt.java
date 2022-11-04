@@ -10,9 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,16 +45,19 @@ public class Emprunt {
 	@JoinColumn(name = "ID_CLIENT")
 	private Client client;
 
-	/** Liste des livres */
-	@ManyToMany
-	@JoinTable(name = "COMPO", 
-	joinColumns = {@JoinColumn(name = "ID_EMP", referencedColumnName = "ID")}, 
-	inverseJoinColumns = {@JoinColumn(name = "ID_LIV", referencedColumnName = "ID")})
-	private List<Livre> livres = new ArrayList<Livre>();
+	/** Liste des compos */
+	@OneToMany(mappedBy = "emprunt")
+	private List<Compo> compos = new ArrayList<Compo>();
 
 	/** Constructeur */
 	public Emprunt() {
 		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Emprunt [id=" + id + ", dateDebut=" + dateDebut + ", delai=" + delai + ", dateFin=" + dateFin
+				+ ", client=" + client + "]";
 	}
 
 	/**
@@ -146,6 +148,15 @@ public class Emprunt {
 	 */
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	/**
+	 * Getter pour l'attribut compos
+	 * 
+	 * @return the compos
+	 */
+	public List<Compo> getCompos() {
+		return compos;
 	}
 
 }
